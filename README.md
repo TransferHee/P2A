@@ -12,3 +12,6 @@ This repository contains official PyTorch code for the Prioritized Patch Attack 
 - pillow == 9.3.0
 - tqdm == 4.64.1
   
+```bash
+pip install -r requirements.txt
+```
