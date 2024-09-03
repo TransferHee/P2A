@@ -43,19 +43,6 @@ def wrap_model(model):
         normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     return torch.nn.Sequential(normalize, model)
 
-def get_last_layers(model, model_name):
-    if 'inception_resnet_v2' == model_name:
-        layer = model[1].classif
-    elif 'inception_v4' == model_name:
-        layer = model[1].last_linear
-    elif 'vgg' in model_name or 'convnext' in model_name:
-        layer = model[1].head
-    elif 'densenet' in model_name:
-        layer = model[1].classifier
-    else:
-        layer = model[1].fc
-    return layer
-
 def calc_distance(perturb):
     '''
     perturb: torch.Tensor (Batch, 3, 224, 224)
