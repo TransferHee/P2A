@@ -1,5 +1,5 @@
 # P2A
-This repository contains official PyTorch code implementation for the Prioritized Patch Attack (P2A)
+This repository contains official PyTorch code implementation for the **Prioritized Patch Attack (P2A)**
 
 [Asking Model Interperter Where to Attack: Enhancing Adversarial Transferability via Prioritized Patch Attack]
 
