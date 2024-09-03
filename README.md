@@ -42,7 +42,7 @@ After you run the above code, the generated adversarial examples would be saved 
 python test.py --model={MODEL_NAME}
 ```
 
-## Main Results
+## Main Result
 ![Result](https://github.com/TransferHee/P2A/blob/main/Figures/Result_Table.png)
 
 
