@@ -25,7 +25,7 @@ def args_parser():
     
     parser.add_argument('--layer', type=str, default='layer1', help='Target feature layer')
     parser.add_argument('--tau', type=float, default=1e+1, help='Tau')
-    parser.add_argument('--eta', type=float, default=0.3, help='Attenuation factor')
+    parser.add_argument('--eta', type=float, default=0.35, help='Attenuation factor')
     
     parser.add_argument('--seed', type=int, default=42, help='Random seed')
     parser.add_argument('--gpu_id', type=str, default='0', help='GPU ID')
@@ -68,8 +68,9 @@ def main():
     
     print('==> Start generating adversarial examples')
     for batch_idx, (inputs, targets, filenames) in tqdm(enumerate(dataloader), total=1000 // args.batch_size):
-    
+        
         perturbation = attacker(inputs, targets)
+
         x_adv = inputs + perturbation.cpu()
         save_images(f'./result/{args.attack}/{args.model}', x_adv, filenames)
         

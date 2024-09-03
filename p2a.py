@@ -3,11 +3,11 @@ import torch.nn.functional as F
 
 from captum.attr import GuidedGradCam
 
-from .utils import load_single_model, wrap_model
+from utils import load_single_model, wrap_model
 
 class P2A():
     def __init__(self, model_name, epsilon=16/255, alpha=1.6/255, epoch=10, decay=1, num_ens=30, tau=1e+1, eta=0.3,
-                device='cpu', attack='P2A', feature_layer='layer2'):
+                device='cuda', attack='P2A', feature_layer='layer2'):
         
         self.attack = attack
         self.epsilon = epsilon
@@ -28,7 +28,7 @@ class P2A():
         
     def load_model(self, model_name):
         model = load_single_model(model_name)
-        return wrap_model(model.eval.to(self.device))
+        return wrap_model(model.eval().to(self.device))
     
     def find_layer(self,layer_name):
         parser = layer_name.split(' ')
@@ -44,6 +44,10 @@ class P2A():
     def get_last_feature_layer(self, model, model_name):
         if model_name == 'resnet101':
             return model[1].layer4
+        elif model_name == 'vgg16':
+            return model[1].features
+        elif model_name == 'inception_v3':
+            return model[1].Mixed_7c
         else:
             raise NotImplementedError('Model not supported')
     
@@ -138,7 +142,11 @@ class P2A():
 
             # l-inf norm
             delta = torch.clamp(delta - self.alpha * torch.sign(momentum), -self.epsilon, self.epsilon)
-            delta = torch.clamp(delta, 1.0 - data, 0.0 - data)
+            delta = torch.clamp(delta, 0 - data, 1.0 - data)
 
         h.remove()
         return delta.detach()
+
+    def __call__(self, *input, **kwargs):
+        self.model.eval()
+        return self.forward(*input, **kwargs)
