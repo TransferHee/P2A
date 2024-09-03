@@ -43,7 +43,7 @@ python test.py --model={MODEL_NAME}
 ```
 
 ## Main Results
-[!Result](https://github.com/TransferHee/P2A/blob/main/Figures/Result_Table.png)
+![Result](https://github.com/TransferHee/P2A/blob/main/Figures/Result_Table.png)
 
 
 ## Acknowledgement
