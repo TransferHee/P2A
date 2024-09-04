@@ -43,6 +43,9 @@ python test.py --model={MODEL_NAME}
 ```
 
 ## Main Result
+
+Please check the hyper-parameter for each source model described in paper.
+
 ![Result](https://github.com/TransferHee/P2A/blob/main/Figures/Result_Table.png)
 
 
